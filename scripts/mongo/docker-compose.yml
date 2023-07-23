@@ -13,8 +13,7 @@ services:
     volumes:
       - ./data/mongodb-cluster-1:/data/db
     networks:
-      - mongodb-cluster
-
+      - ms-service
   mongo2:
     container_name: mongodb-cluster-2
     image: mongo:6.0.3
@@ -24,8 +23,7 @@ services:
     volumes:
       - ./data/mongodb-cluster-2:/data/db
     networks:
-      - mongodb-cluster
-
+      - ms-service
   mongo3:
     container_name: mongodb-cluster-3
     image: mongo:6.0.3
@@ -35,10 +33,10 @@ services:
     volumes:
       - ./data/mongodb-cluster-3:/data/db
     networks:
-      - mongodb-cluster
-
+      - ms-service
 networks:
-  mongodb-cluster:
+  ms-service:
+    name: ms-service
 
 # docker exec -it mongodb-cluster-1 mongosh
 # rs.initiate({_id:"mongodb-cluster",members:[{_id:0,host:"mongodb-cluster-1:27017"},{_id:1,host:"mongodb-cluster-2:27017"},{_id:2,host:"mongodb-cluster-3:27017"}]})

@@ -1,5 +1,20 @@
-version: '3'
+version: '3.8'
 services:
+  server:
+    container_name: user-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sing3demons/user-service
+    ports:
+      - '3000:3000'
+    environment:
+      - DATABASE_URL=mongodb://host.docker.internal:30001/expressAPI?directConnection=true&serverSelectionTimeoutMS=3000
+      - KAFKA_BROKERS=kafka:9092
+    depends_on:
+      - kafka
+    networks:
+      - ms-service
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.0
     hostname: zookeeper
@@ -9,9 +24,10 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - ms-service
-  broker:
+  kafka:
     image: confluentinc/cp-kafka:7.3.0
-    container_name: broker
+    container_name: kafka
+    hostname: kafka
     ports:
       - 9092:9092
       - 29092:29092

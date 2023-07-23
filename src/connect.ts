@@ -8,6 +8,7 @@ async function ConnectMongo() {
     await prisma.$connect()
     logger.info('Connected to database')
   } catch (error: any) {
+    logger.error('Error connecting to database')
     throw new Error(error)
   }
 }

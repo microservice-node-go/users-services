@@ -7,6 +7,7 @@ down:
 	docker compose -f scripts/mongo/docker-compose.yml down
 	rm -rf ./scripts/mongo/data
 	docker compose -f scripts/kafka/docker-compose.yml down
+	docker compose down
 
 # Path: scripts/kafka
 start-mongo:

@@ -1,4 +1,4 @@
-FROM node:16-alpine 
+FROM node:16.17.0
 WORKDIR /usr/src/app
 ENV TZ=Asia/Bangkok
 COPY package.json ./

@@ -9,13 +9,15 @@ async function consumer(): Promise<void> {
 
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        logger.info({
-          value: message?.value?.toString(),
-          key: message?.key?.toString(),
-          headers: message?.headers,
-          topic,
-          partition,
-        })
+        logger.info(
+          JSON.stringify({
+            value: message?.value?.toString(),
+            key: message?.key?.toString(),
+            headers: message?.headers,
+            topic,
+            partition,
+          })
+        )
 
         console.log(message?.value?.toString())
       },
